@@ -7,44 +7,77 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     private int size;
 
     public DoubleLinkedList() {
-        // TODO
+        this.first = null;
+        this.last = null;
+        this.size = 0;
     }
 
     @Override
     public void prepend(T value) {
-        // TODO
+        if (first != null) {
+            LinkedNode<T> newNode = new LinkedNode<T>(value, null, first);
+            this.first.setPrevious(newNode);
+            this.first = newNode;
+        } else {
+            this.first = new LinkedNode<T>(value, null, null);
+        }
+
+        this.size++;
     }
 
     @Override
     public void append(T value) {
-        // TODO
+        if (last != null) {
+            LinkedNode<T> newNode = new LinkedNode<T>(value, last, null);
+            this.last.setNext(newNode);
+            this.last = newNode;
+        } else if (first != null) {
+            this.last = new LinkedNode<T>(value, first, null);
+        } else {
+            this.first = new LinkedNode<T>(value, null, null);
+        }
+       
+        this.size++;
     }
 
     @Override
     public void deleteFirst() {
-        // TODO
+        if (first.getNext() != null) {
+            LinkedNode<T> tempNode = this.first.getNext();
+            this.first = tempNode;
+            this.first.setPrevious(null);
+        } else {
+            this.first = null;
+        }
+        
+        this.size--;
     }
 
     @Override
     public void deleteLast() {
-        // TODO
+        if (this.size > 1) {
+            LinkedNode<T> tempNode = this.last.getPrevious();
+            this.last = tempNode;
+            this.last.setNext(null);
+        } else {
+            this.first = null;
+        }
+
+        this.size--;
     }
 
     @Override
     public T first() {
-        // TODO
-        return null;
+        return this.first.getItem();
     }
 
     @Override
     public T last() {
-        // TODO
-        return null;
+        return this.last.getItem();
     }
 
     @Override
     public int size() {
-        // TODO
-        return 0;
+        return this.size;
     }
 }

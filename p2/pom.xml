@@ -4,7 +4,7 @@
 	
 	<!--Informacion del proyecto -->
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.mps</groupId>
+	<groupId>org.mps.deque</groupId>
 	<artifactId>mockito-mps-uma</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	
