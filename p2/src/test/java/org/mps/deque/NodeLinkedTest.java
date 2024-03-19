@@ -88,12 +88,44 @@ class NodeLinkedTest {
         }
 
         @Test
-        @DisplayName("Is Not a Terminal Node")
-        void isNotATerminalNode() {
+        @DisplayName("Is Not a Terminal Node - Middle Node")
+        void isNotATerminalNode_MiddleNode() {
             LinkedNode<Integer> previousNode = new LinkedNode<>(3, null, null);
             LinkedNode<Integer> nextNode = new LinkedNode<>(7, null, null);
             LinkedNode<Integer> node = new LinkedNode<>(5, previousNode, nextNode);
             assertTrue(node.isNotATerminalNode());
+        }
+
+        @Test
+        @DisplayName("Is Not a Terminal Node - First Node with Next")
+        void isNotATerminalNode_FirstNodeWithNext() {
+            LinkedNode<Integer> nextNode = new LinkedNode<>(7, null, null);
+            LinkedNode<Integer> node = new LinkedNode<>(5, null, nextNode);
+            assertFalse(node.isNotATerminalNode());
+        }
+
+        @Test
+        @DisplayName("Is Not a Terminal Node - Last Node with Previous")
+        void isNotATerminalNode_LastNodeWithPrevious() {
+            LinkedNode<Integer> previousNode = new LinkedNode<>(3, null, null);
+            LinkedNode<Integer> node = new LinkedNode<>(5, previousNode, null);
+            assertFalse(node.isNotATerminalNode());
+        }
+
+        @Test
+        @DisplayName("Is Not a Terminal Node - First Node with Next and Previous")
+        void isNotATerminalNode_FirstNodeWithNextAndPrevious() {
+            LinkedNode<Integer> nextNode = new LinkedNode<>(7, null, null);
+            LinkedNode<Integer> node = new LinkedNode<>(5, null, nextNode);
+            assertFalse(node.isNotATerminalNode());
+        }
+
+        @Test
+        @DisplayName("Is Not a Terminal Node - Last Node with Previous and Next")
+        void isNotATerminalNode_LastNodeWithPreviousAndNext() {
+            LinkedNode<Integer> previousNode = new LinkedNode<>(3, null, null);
+            LinkedNode<Integer> node = new LinkedNode<>(5, previousNode, null);
+            assertFalse(node.isNotATerminalNode());
         }
     }
 }

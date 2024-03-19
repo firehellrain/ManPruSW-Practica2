@@ -20,6 +20,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
             this.first = newNode;
         } else {
             this.first = new LinkedNode<T>(value, null, null);
+            this.last = this.first; // He añadido esto
         }
 
         this.size++;
@@ -33,10 +34,12 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
             this.last = newNode;
         } else if (first != null) {
             this.last = new LinkedNode<T>(value, first, null);
+            this.first.setNext(last); // He añadido esto
         } else {
             this.first = new LinkedNode<T>(value, null, null);
+            this.last = this.first; // He añadido esto
         }
-       
+
         this.size++;
     }
 
@@ -48,8 +51,9 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
             this.first.setPrevious(null);
         } else {
             this.first = null;
+            this.last = null; // He añadido esto
         }
-        
+
         this.size--;
     }
 
@@ -61,6 +65,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
             this.last.setNext(null);
         } else {
             this.first = null;
+            this.last = null;
         }
 
         this.size--;
@@ -68,11 +73,19 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     @Override
     public T first() {
+        // Añadido excepciones
+        if (size == 0) {
+            throw new DoubleLinkedQueueException("Deque is empty");
+        }
         return this.first.getItem();
     }
 
     @Override
     public T last() {
+        // Añadido excepciones
+        if (size == 0) {
+            throw new DoubleLinkedQueueException("Deque is empty");
+        }
         return this.last.getItem();
     }
 
