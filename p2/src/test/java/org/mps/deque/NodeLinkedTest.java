@@ -88,8 +88,9 @@ class NodeLinkedTest {
         }
 
         @Test
-        @DisplayName("Is Not a Terminal Node - Middle Node")
-        void isNotATerminalNode_MiddleNode() {
+
+        @DisplayName("Is Not a Terminal Node")
+        void isNotATerminalNode() {
             LinkedNode<Integer> previousNode = new LinkedNode<>(3, null, null);
             LinkedNode<Integer> nextNode = new LinkedNode<>(7, null, null);
             LinkedNode<Integer> node = new LinkedNode<>(5, previousNode, nextNode);
@@ -127,5 +128,7 @@ class NodeLinkedTest {
             LinkedNode<Integer> node = new LinkedNode<>(5, previousNode, null);
             assertFalse(node.isNotATerminalNode());
         }
+
     }
+
 }

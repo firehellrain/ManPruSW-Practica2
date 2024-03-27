@@ -61,11 +61,36 @@ class DoubleLinkedListTest {
     @DisplayName("Delete Operation Tests")
     class DeleteOperationTests {
         @Test
+        @DisplayName("Delete First Element from Empty List")
+        void deleteFirstFromEmptyList() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            assertThrows(DoubleLinkedQueueException.class, list::deleteFirst);
+        }
+
+        @Test
+        @DisplayName("Delete Last Element from Empty List")
+        void deleteLastFromEmptyList() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            assertThrows(DoubleLinkedQueueException.class, list::deleteLast);
+        }
+
+        @Test
         @DisplayName("Delete First Element from List with One Element")
         void deleteFirstFromListWithOneElement() {
             DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
             list.prepend(5);
             list.deleteFirst();
+            assertEquals(0, list.size());
+            assertThrows(DoubleLinkedQueueException.class, list::first);
+            assertThrows(DoubleLinkedQueueException.class, list::last);
+        }
+
+        @Test
+        @DisplayName("Delete Last Element from List with One Element")
+        void deleteLastFromListWithOneElement() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(5);
+            list.deleteLast();
             assertEquals(0, list.size());
             assertThrows(DoubleLinkedQueueException.class, list::first);
             assertThrows(DoubleLinkedQueueException.class, list::last);

@@ -1,9 +1,11 @@
 package org.mps.deque;
 
 /**
- * Class representing a node of a double-ended queue (deque). Each node has references to
+ * Class representing a node of a double-ended queue (deque). Each node has
+ * references to
  * the next and previous nodes.
- * The previous and next of the first and last node of the deque is {@code null}.
+ * The previous and next of the first and last node of the deque is
+ * {@code null}.
  *
  * @param <T> the type of elements held in the deque.
  */

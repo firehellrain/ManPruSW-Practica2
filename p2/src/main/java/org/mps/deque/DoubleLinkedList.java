@@ -14,61 +14,56 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     @Override
     public void prepend(T value) {
+        LinkedNode<T> newNode = new LinkedNode<T>(value, null, first);
         if (first != null) {
-            LinkedNode<T> newNode = new LinkedNode<T>(value, null, first);
-            this.first.setPrevious(newNode);
-            this.first = newNode;
+            first.setPrevious(newNode);
         } else {
-            this.first = new LinkedNode<T>(value, null, null);
-            this.last = this.first; // He añadido esto
+            last = newNode; // Si es el primer elemento, last también apunta a él
         }
-
-        this.size++;
+        first = newNode;
+        size++;
     }
 
     @Override
     public void append(T value) {
+        LinkedNode<T> newNode = new LinkedNode<T>(value, last, null);
         if (last != null) {
-            LinkedNode<T> newNode = new LinkedNode<T>(value, last, null);
-            this.last.setNext(newNode);
-            this.last = newNode;
-        } else if (first != null) {
-            this.last = new LinkedNode<T>(value, first, null);
-            this.first.setNext(last); // He añadido esto
+            last.setNext(newNode);
         } else {
-            this.first = new LinkedNode<T>(value, null, null);
-            this.last = this.first; // He añadido esto
+            first = newNode; // Si es el primer elemento, first también apunta a él
         }
-
-        this.size++;
+        last = newNode;
+        size++;
     }
 
     @Override
     public void deleteFirst() {
-        if (first.getNext() != null) {
-            LinkedNode<T> tempNode = this.first.getNext();
-            this.first = tempNode;
-            this.first.setPrevious(null);
-        } else {
-            this.first = null;
-            this.last = null; // He añadido esto
+        if (size == 0) {
+            throw new DoubleLinkedQueueException("Deque is empty");
         }
-
-        this.size--;
+        if (first.getNext() != null) {
+            first = first.getNext();
+            first.setPrevious(null);
+        } else {
+            first = null;
+            last = null;
+        }
+        size--;
     }
 
     @Override
     public void deleteLast() {
-        if (this.size > 1) {
-            LinkedNode<T> tempNode = this.last.getPrevious();
-            this.last = tempNode;
-            this.last.setNext(null);
-        } else {
-            this.first = null;
-            this.last = null;
+        if (size == 0) {
+            throw new DoubleLinkedQueueException("Deque is empty");
         }
-
-        this.size--;
+        if (size > 1) {
+            last = last.getPrevious();
+            last.setNext(null);
+        } else {
+            first = null;
+            last = null;
+        }
+        size--;
     }
 
     @Override
