@@ -1,3 +1,8 @@
+/*
+ * Realizado por:
+ * David Zarzavilla Borrego
+ * Pablo Ruiz-Cruces Fernández-Vázquez 
+ */
 package org.mps.deque;
 
 /**
@@ -22,7 +27,6 @@ public interface DoubleLinkedQueue<T> {
      * @param value the value to be inserted
      */
     void append(T value);
-
 
     /**
      * Deletes the first element of this deque.
@@ -60,6 +64,7 @@ public interface DoubleLinkedQueue<T> {
     int size();
 
     // Complex operations
-    // (Estas operaciones se incluirán más adelante para ser realizadas en la segunda
+    // (Estas operaciones se incluirán más adelante para ser realizadas en la
+    // segunda
     // sesión de laboratorio de esta práctica.)
 }
