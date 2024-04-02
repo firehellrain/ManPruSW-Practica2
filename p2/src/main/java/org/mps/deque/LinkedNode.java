@@ -1,3 +1,8 @@
+/*
+ * Realizado por:
+ * David Zarzavilla Borrego
+ * Pablo Ruiz-Cruces Fernández-Vázquez 
+ */
 package org.mps.deque;
 
 /**
