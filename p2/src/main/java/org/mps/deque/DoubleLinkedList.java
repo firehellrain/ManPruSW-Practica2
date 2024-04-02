@@ -5,6 +5,10 @@
  */
 package org.mps.deque;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     private LinkedNode<T> first;
@@ -92,5 +96,65 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     @Override
     public int size() {
         return this.size;
+    }
+
+    @Override
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index out of range");
+        }
+        LinkedNode<T> current = first;
+        for (int i = 0; i < index; i++) {
+            current = current.getNext();
+        }
+        return current.getItem();
+    }
+
+    @Override
+    public boolean contains(T value) {
+        LinkedNode<T> current = first;
+        while (current != null) {
+            if (current.getItem().equals(value)) {
+                return true;
+            }
+            current = current.getNext();
+        }
+        return false;
+    }
+
+    @Override
+    public void remove(T value) {
+        LinkedNode<T> current = first;
+        while (current != null) {
+            if (current.getItem().equals(value)) {
+                if (current == first) {
+                    deleteFirst();
+                } else if (current == last) {
+                    deleteLast();
+                } else {
+                    current.getPrevious().setNext(current.getNext());
+                    current.getNext().setPrevious(current.getPrevious());
+                    size--;
+                }
+                return;
+            }
+            current = current.getNext();
+        }
+    }
+
+    @Override
+    public void sort(Comparator<? super T> comparator) {
+        List<T> list = new ArrayList<>();
+        LinkedNode<T> current = first;
+        while (current != null) {
+            list.add(current.getItem());
+            current = current.getNext();
+        }
+        list.sort(comparator);
+        current = first;
+        for (T item : list) {
+            current.setItem(item);
+            current = current.getNext();
+        }
     }
 }

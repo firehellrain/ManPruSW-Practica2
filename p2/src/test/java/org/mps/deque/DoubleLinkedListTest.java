@@ -167,4 +167,110 @@ class DoubleLinkedListTest {
             assertThrows(DoubleLinkedQueueException.class, list::last);
         }
     }
+
+    @Nested
+    @DisplayName("Complex Operations Tests")
+    class ComplexOperationsTests {
+
+        @Test
+        @DisplayName("Get Element at Index")
+        void getElementAtIndex() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+            list.append(2);
+            list.append(3);
+            assertEquals(1, list.get(0));
+            assertEquals(2, list.get(1));
+            assertEquals(3, list.get(2));
+        }
+
+        @Test
+        @DisplayName("Get Element at Invalid Index Throws Exception")
+        void getElementAtInvalidIndexThrowsException() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+            assertThrows(IndexOutOfBoundsException.class, () -> list.get(1));
+            assertThrows(IndexOutOfBoundsException.class, () -> list.get(-1));
+        }
+
+        @Test
+        @DisplayName("Check if List Contains Element")
+        void listContainsElement() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+            list.append(2);
+            list.append(3);
+            assertTrue(list.contains(2));
+        }
+
+        @Test
+        @DisplayName("Check if List Does Not Contain Element")
+        void listDoesNotContainElement() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+            list.append(2);
+            list.append(3);
+            assertFalse(list.contains(4));
+        }
+
+        @Test
+        @DisplayName("Remove First Element from List with One Element")
+        void removeFirstFromListWithOneElement() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(5);
+            list.remove(5);
+            assertEquals(0, list.size());
+        }
+
+        @Test
+        @DisplayName("Remove Last Element from List with One Element")
+        void removeLastFromListWithOneElement() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(1);
+            list.append(5);
+            list.remove(5);
+            assertEquals(1, list.size());
+
+        }
+
+        @Test
+        @DisplayName("Remove Element from List with Multiple Elements")
+        void removeElementFromListWithMultipleElements() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(5);
+            list.append(10);
+            list.append(15);
+            list.remove(10);
+            assertEquals(2, list.size());
+            assertEquals(5, list.first());
+            assertEquals(15, list.last());
+        }
+
+        @Test
+        @DisplayName("Remove Element Not Present in List")
+        void removeElementNotPresentInList() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(5);
+            list.append(10);
+            list.append(15);
+            list.remove(20); // Removing an element not present in the list
+            assertEquals(3, list.size());
+            assertTrue(list.contains(5));
+            assertTrue(list.contains(10));
+            assertTrue(list.contains(15));
+        }
+
+        @Test
+        @DisplayName("Sort List")
+        void sortList() {
+            DoubleLinkedQueue<Integer> list = new DoubleLinkedList<>();
+            list.append(3);
+            list.append(1);
+            list.append(2);
+            list.sort(Integer::compareTo);
+            assertEquals(1, list.get(0));
+            assertEquals(2, list.get(1));
+            assertEquals(3, list.get(2));
+        }
+    }
 }
